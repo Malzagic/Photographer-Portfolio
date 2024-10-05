@@ -2,11 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 
 import HomeNavigation from "../components/navigation/HomeNavigation";
 import Hero from "../components/hero/Hero";
-import About from "../components/sections/About";
 import Gallery from "../components/sections/Gallery";
-import Awards from "../components/sections/Awards";
+import Blog from "../components/sections/Blog";
 import Footer from "../components/sections/Footer";
-import Contact from "../components/sections/Contact";
 import CustomMainContainer from "../components/ui/CustomMainContainer";
 
 export default function HomePage() {
@@ -37,6 +35,7 @@ export default function HomePage() {
       </div>
       <CustomMainContainer styles="flex-1">
         <Gallery />
+        <Blog />
       </CustomMainContainer>
       <Footer />
     </div>

@@ -2,9 +2,10 @@ import React from "react";
 
 import HomeNavigation from "../components/navigation/HomeNavigation";
 import PageHero from "../components/hero/PageHero";
-import CustomMainContainer from "../components/ui/CustomMainContainer";
 import About from "../components/sections/About";
 import Awards from "../components/sections/Awards";
+import Footer from "../components/sections/Footer";
+import CustomMainContainer from "../components/ui/CustomMainContainer";
 
 export default function AboutPage() {
   return (
@@ -15,6 +16,7 @@ export default function AboutPage() {
         <About />
         <Awards />
       </CustomMainContainer>
+      <Footer />
     </div>
   );
 }

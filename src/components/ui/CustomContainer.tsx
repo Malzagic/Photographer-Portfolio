@@ -38,7 +38,7 @@ export default function CustomContainer({
           paragraphStyles ? paragraphStyles : ""
         } text-lg text-slate-300 font-semibold my-5`}
       >
-        {paragraph}
+        {paragraph + "..."}
       </p>
       {children}
     </div>

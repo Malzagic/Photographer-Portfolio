@@ -8,9 +8,6 @@ export default function OtherNavigation() {
         <li className="m-5 px-5">
           <Link to="/">Home</Link>
         </li>
-        <li className="m-5 px-5">
-          <Link to="/blog">Blog</Link>
-        </li>
       </ul>
     </nav>
   );

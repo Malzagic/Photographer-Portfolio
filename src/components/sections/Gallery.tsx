@@ -56,7 +56,7 @@ const Gallery = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <CustomContainer id="gallery" title="Gallery" paragraph="Enjoy my works…">
+    <CustomContainer id="gallery" title="Gallery" paragraph="Enjoy my works">
       <div className="flex flex-col sm:flex-row">
         {categories.map((category) => {
           // Get the first photo for each category
