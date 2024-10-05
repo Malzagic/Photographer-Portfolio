@@ -4,11 +4,12 @@ import { FaYoutube, FaFacebook, FaInstagram } from "react-icons/fa";
 
 type PROPS = {
   size: number;
+  styles?: string;
 };
 
-export default function SocialMediaBar({ size }: PROPS) {
+export default function SocialMediaBar({ size, styles }: PROPS) {
   return (
-    <div className="flex flex-row my-4 justify-evenly items-center z-50">
+    <div className={`flex flex-row my-4 justify-evenly items-center ${styles}`}>
       <a
         href="https://www.facebook.com/przemyslawmloczkowskiphotographer"
         target="_blank"

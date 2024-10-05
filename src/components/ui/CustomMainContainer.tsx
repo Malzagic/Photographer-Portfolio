@@ -7,5 +7,5 @@ export default function CustomMainContainer({
   children: any;
   styles?: string;
 }) {
-  return <main className={`${styles} px-4`}>{children}</main>;
+  return <main className={`${styles} px-4 my-5 py-5`}>{children}</main>;
 }

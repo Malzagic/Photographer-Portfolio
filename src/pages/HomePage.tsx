@@ -36,10 +36,7 @@ export default function HomePage() {
         <Hero />
       </div>
       <CustomMainContainer styles="flex-1">
-        <Awards />
-        <About />
         <Gallery />
-        <Contact />
       </CustomMainContainer>
       <Footer />
     </div>

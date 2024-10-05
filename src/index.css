@@ -35,3 +35,36 @@ header {
 header.pageHero {
   height: 50vh;
 }
+
+.masonry {
+  column-count: 3; /* Liczba kolumn - możesz dostosować do rozmiaru ekranu */
+  column-gap: 1rem; /* Odstępy między kolumnami */
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem; /* Odstęp między elementami */
+}
+
+.masonry {
+  column-count: 1; /* Domyślnie 1 kolumna dla małych ekranów */
+  column-gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .masonry {
+    column-count: 2; /* 2 kolumny dla ekranów średnich */
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry {
+    column-count: 3; /* 3 kolumny dla ekranów dużych */
+  }
+}
+
+@media (min-width: 1280px) {
+  .masonry {
+    column-count: 4; /* 4 kolumny dla jeszcze większych ekranów */
+  }
+}

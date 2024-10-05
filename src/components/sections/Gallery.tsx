@@ -56,13 +56,6 @@ const Gallery = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    // <div
-    //   id="gallery"
-    //   className="flex flex-col sm:flex-row justify-center items-center bg-gray-900 py-5"
-    // >
-
-    // </div>
-
     <CustomContainer id="gallery" title="Gallery" paragraph="Enjoy my works…">
       <div className="flex flex-col sm:flex-row">
         {categories.map((category) => {
