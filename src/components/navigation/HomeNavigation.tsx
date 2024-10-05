@@ -14,8 +14,9 @@ export default function HomeNavigation({ isVisible }: PROPS) {
     >
       <ul className="flex flex-row justify-evenly text-slate-50 text-lg font-semibold mx-4 p-2">
         <CustomMenuItem text="Home" to="/" />
-        <CustomMenuItem text="About" to="/about" />
         <CustomMenuItem text="Gallery" to="/gallery" />
+        <CustomMenuItem text="Blog" to="/blog" />
+        <CustomMenuItem text="About" to="/about" />
         <CustomMenuItem text="Contact" to="/contact" />
       </ul>
     </nav>

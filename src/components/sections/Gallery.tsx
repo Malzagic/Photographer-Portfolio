@@ -52,13 +52,22 @@ const Gallery = () => {
     );
   };
 
+  // Filter and sort to get the latest 3 categories
+  const latestCategories = [...categories]
+    .sort((a, b) => {
+      const dateA = new Date(a.attributes.createdAt).getTime();
+      const dateB = new Date(b.attributes.createdAt).getTime();
+      return dateB - dateA; // Sort descending by creation date
+    })
+    .slice(0, 3); // Take the first 3
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
     <CustomContainer id="gallery" title="Gallery" paragraph="Enjoy my works">
       <div className="flex flex-col sm:flex-row">
-        {categories.map((category) => {
+        {latestCategories.map((category) => {
           // Get the first photo for each category
           const coverPhoto = getCategoryCoverPhoto(category.id.toString());
 

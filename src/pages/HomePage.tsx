@@ -6,6 +6,7 @@ import Gallery from "../components/sections/Gallery";
 import Blog from "../components/sections/Blog";
 import Footer from "../components/sections/Footer";
 import CustomMainContainer from "../components/ui/CustomMainContainer";
+import Newsletter from "../components/sections/Newsletter";
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(true);
@@ -36,6 +37,7 @@ export default function HomePage() {
       <CustomMainContainer styles="flex-1">
         <Gallery />
         <Blog />
+        <Newsletter />
       </CustomMainContainer>
       <Footer />
     </div>

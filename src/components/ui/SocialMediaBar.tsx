@@ -9,7 +9,11 @@ type PROPS = {
 
 export default function SocialMediaBar({ size, styles }: PROPS) {
   return (
-    <div className={`flex flex-row my-4 justify-evenly items-center ${styles}`}>
+    <div
+      className={`flex flex-row my-4 justify-evenly items-center ${
+        styles ? styles : ""
+      }`}
+    >
       <a
         href="https://www.facebook.com/przemyslawmloczkowskiphotographer"
         target="_blank"
