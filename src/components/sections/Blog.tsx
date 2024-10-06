@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import axios from "axios";
 
 import { blogReducer, initialState } from "../../reducers/blogReducer";
@@ -37,11 +38,13 @@ export default function Blog() {
         console.error(err);
         if (err instanceof Error) {
           dispatch({ type: FETCHING_ACTIONS.ERROR, error: err.message });
+          toast.error(`Blog component: ${err.message}`);
         } else {
           dispatch({
             type: FETCHING_ACTIONS.ERROR,
             error: "Unknown error occurred",
           });
+          toast.error(`Blog component: "Unknown error occurred"`);
         }
       }
     };
@@ -62,8 +65,8 @@ export default function Blog() {
   }, [data]);
 
   if (loading) return <Loader />;
-  if (error)
-    return <Notifications type="error" message={`Component Blog: ${error}`} />;
+  if (error) return <Notifications />;
+
   return (
     <CustomContainer title="Blog" paragraph="Recent blog posts">
       <div className="flex flex-wrap gap-6 m-5 py-5 justify-center items-stretch">
