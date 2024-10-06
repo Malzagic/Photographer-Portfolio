@@ -1,10 +1,7 @@
-import React, { useEffect, useReducer, useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import axios from "axios";
 
-import { blogReducer, initialState } from "../../reducers/blogReducer";
-import { FETCHING_ACTIONS } from "../../actions";
+import BlogContext from "../../context/BlogContext";
 
 import CustomContainer from "../ui/CustomContainer";
 import Notifications from "../ui/Notifications";
@@ -13,44 +10,7 @@ import Loader from "../ui/Loader";
 const baseURL = "http://localhost:1337";
 
 export default function Blog() {
-  const [state, dispatch] = useReducer(blogReducer, initialState);
-  const { data, loading, error } = state;
-
-  useEffect(() => {
-    dispatch({ type: FETCHING_ACTIONS.PROGRESS });
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${baseURL}/api/blogs?populate=image`,
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.REACT_APP_BR_TOKEN}`,
-            },
-          }
-        );
-        if (response.status === 200) {
-          dispatch({
-            type: FETCHING_ACTIONS.SUCCESS,
-            payload: response.data.data,
-          });
-        }
-      } catch (err) {
-        console.error(err);
-        if (err instanceof Error) {
-          dispatch({ type: FETCHING_ACTIONS.ERROR, error: err.message });
-          toast.error(`Blog component: ${err.message}`);
-        } else {
-          dispatch({
-            type: FETCHING_ACTIONS.ERROR,
-            error: "Unknown error occurred",
-          });
-          toast.error(`Blog component: "Unknown error occurred"`);
-        }
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { data, loading, error } = useContext(BlogContext);
 
   const recentPosts = useMemo(() => {
     if (data) {

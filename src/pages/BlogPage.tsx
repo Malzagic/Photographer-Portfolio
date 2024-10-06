@@ -1,44 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
+import BlogContext from "../context/BlogContext";
 
 import PageHero from "../components/hero/PageHero";
 import CustomMainContainer from "../components/ui/CustomMainContainer";
 import Footer from "../components/sections/Footer";
 
+const baseURL = "http://localhost:1337/";
+
 export default function BlogPage() {
-  const [blogData, setBlogData] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const baseURL = "http://localhost:1337";
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await axios.get(
-          `${baseURL}/api/blogs?populate=image`,
-          {
-            headers: {
-              Authorization: `Bearer ${process.env.REACT_APP_BR_TOKEN}`,
-            },
-          }
-        );
-
-        setBlogData(response.data.data);
-      } catch (err) {
-        setError("Error fetching data");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  console.log(blogData);
+  const { data, loading, error } = useContext(BlogContext);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -48,7 +20,7 @@ export default function BlogPage() {
       <PageHero title="Blog" />
       <CustomMainContainer styles="flex-1 py-4">
         <div className="grid grid-cols-3 gap-3 my-4">
-          {blogData.map((post, index) => (
+          {data.map((post, index) => (
             <Link
               to={`/blog/${post.id}`}
               key={index}
