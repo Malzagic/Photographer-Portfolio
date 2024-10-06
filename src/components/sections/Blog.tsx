@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useReducer, useMemo } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+
+import { blogReducer, initialState } from "../../reducers/blogReducer";
+import { FETCHING_ACTIONS } from "../../actions";
+
 import CustomContainer from "../ui/CustomContainer";
+import Notifications from "../ui/Notifications";
+import Loader from "../ui/Loader";
+
+const baseURL = "http://localhost:1337";
 
 export default function Blog() {
-  const [blogData, setBlogData] = useState<any[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const baseURL = "http://localhost:1337";
+  const [state, dispatch] = useReducer(blogReducer, initialState);
+  const { data, loading, error } = state;
 
   useEffect(() => {
+    dispatch({ type: FETCHING_ACTIONS.PROGRESS });
     const fetchData = async () => {
-      setLoading(true);
       try {
         const response = await axios.get(
           `${baseURL}/api/blogs?populate=image`,
@@ -22,33 +27,46 @@ export default function Blog() {
             },
           }
         );
-
-        const sortedData = response.data.data.sort(
-          (a: any, b: any) =>
-            new Date(b.attributes.createdAt).getTime() -
-            new Date(a.attributes.createdAt).getTime()
-        );
-
-        const recentPosts = sortedData.slice(0, 3);
-
-        setBlogData(recentPosts);
+        if (response.status === 200) {
+          dispatch({
+            type: FETCHING_ACTIONS.SUCCESS,
+            payload: response.data.data,
+          });
+        }
       } catch (err) {
-        setError("Error fetching data");
         console.error(err);
-      } finally {
-        setLoading(false);
+        if (err instanceof Error) {
+          dispatch({ type: FETCHING_ACTIONS.ERROR, error: err.message });
+        } else {
+          dispatch({
+            type: FETCHING_ACTIONS.ERROR,
+            error: "Unknown error occurred",
+          });
+        }
       }
     };
 
     fetchData();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  const recentPosts = useMemo(() => {
+    if (data) {
+      const sortedData = data.sort(
+        (a: any, b: any) =>
+          new Date(b.attributes.createdAt).getTime() -
+          new Date(a.attributes.createdAt).getTime()
+      );
+      return sortedData.slice(0, 3);
+    }
+    return [];
+  }, [data]);
+
+  if (loading) return <Loader />;
+  if (error) return <Notifications message={`Component Blog: ${error}`} />;
   return (
     <CustomContainer title="Blog" paragraph="Recent blog posts">
       <div className="flex flex-wrap gap-6 m-5 py-5 justify-center items-stretch">
-        {blogData.map((post, index) => (
+        {recentPosts.map((post: any, index: any) => (
           <Link
             to={`/blog/${post.id}`}
             key={index}
