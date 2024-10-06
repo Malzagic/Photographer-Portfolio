@@ -71,5 +71,5 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 ## Contact
 
 Przemysław Młoczkowski  
-[Your Email](mailto:przemek2142@gmail.com)  
-[Your Website](https://www.pmdev.ovh/)
+[My Email](mailto:przemek2142@gmail.com)  
+[My Website](https://www.pmdev.ovh/)
