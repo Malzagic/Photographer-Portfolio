@@ -62,7 +62,8 @@ export default function Blog() {
   }, [data]);
 
   if (loading) return <Loader />;
-  if (error) return <Notifications message={`Component Blog: ${error}`} />;
+  if (error)
+    return <Notifications type="error" message={`Component Blog: ${error}`} />;
   return (
     <CustomContainer title="Blog" paragraph="Recent blog posts">
       <div className="flex flex-wrap gap-6 m-5 py-5 justify-center items-stretch">
